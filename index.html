@@ -1,0 +1,43 @@
+html
+<!-- Estrutura do Pedido -->
+<div id="interface-pedido" style="font-family: sans-serif; max-width: 400px; border: 1px solid #ddd; padding: 20px; border-radius: 10px;">
+    <h2 style="color: #d35400;">🛒 Fazer Pedido - Empadas da Estácio</h2>
+    
+    <label>Quantidade de Empadas:</label><br>
+    <input type="number" id="quantidade" value="1" min="1" style="width: 100%; padding: 8px; margin: 10px 0;"><br>
+
+    <label>Deseja Catupiry?</label><br>
+    <select id="catupiry" style="width: 100%; padding: 8px; margin: 10px 0;">
+        <option value="Sem Catupiry">Não</option>
+        <option value="Com Catupiry">Sim (Adicional)</option>
+    </select>
+
+    <button onclick="enviarWhatsapp()" style="background-color: #25d366; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer;">
+        Pedir no WhatsApp
+    </button>
+</div>
+
+<!-- Mensagem de Agradecimento (Invisível no início) -->
+<div id="agradecimento" style="display: none; text-align: center; font-family: sans-serif; padding: 20px;">
+    <h2 style="color: #27ae60;">✅ Pedido Enviado!</h2>
+    <p>Muito obrigado por escolher a <strong>Empadas da Estácio</strong>!</p>
+</div>
+
+<script>
+function enviarWhatsapp() {
+    // Coleta os dados
+    const qtd = document.getElementById('quantidade').value;
+    const catupiry = document.getElementById('catupiry').value;
+    const numero = "5521999512027";
+    
+    // Monta a mensagem
+    const mensagem = `Olá! Gostaria de fazer um pedido na Empadas da Estácio:%0A- Quantidade: ${qtd}%0A- Opção: ${catupiry}`;
+    
+    // Abre o link do WhatsApp
+    window.open(`https://wa.me{numero}?text=${mensagem}`, '_blank');
+
+    // Esconde o formulário e mostra o agradecimento
+    document.getElementById('interface-pedido').style.display = 'none';
+    document.getElementById('agradecimento').style.display = 'block';
+}
+</script>
