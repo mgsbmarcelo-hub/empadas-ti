@@ -4,7 +4,7 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empadas da Estácio</title>
+    <title>pizzas do lucas</title>
     <style>
         /* Estilo para centralizar e colocar o fundo */
         body {
@@ -14,7 +14,7 @@ html
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #fce4bd; /* Cor de fundo (creme) */
+            background-color: #fce4bd; /* Cor de fundo (amarelado) */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -65,9 +65,9 @@ html
     <div id="container-vendas">
         <!-- Parte do Formulário -->
         <div id="interface-pedido">
-            <h2>Empadas da Estácio</h2>
+            <h2>pizzas do lucas</h2>
             
-            <label>Quantidade de Empadas:</label>
+            <label>Quantidade de pizzas:</label>
             <input type="number" id="quantidade" value="1" min="1">
 
             <label>Adicionar Catupiry?</label>
@@ -82,7 +82,7 @@ html
         <!-- Parte do Agradecimento -->
         <div id="agradecimento">
             <h2 style="color: #27ae60;">✅ Pedido Enviado!</h2>
-            <p>Muito obrigado por escolher a <strong>Empadas da Estácio</strong>!</p>
+            <p>Muito obrigado por escolher a <strong>A pizzaria do lucas</strong>!</p>
         </div>
     </div>
 
@@ -92,7 +92,7 @@ html
         const catupiry = document.getElementById('catupiry').value;
         const numero = "5521999512027";
         
-        const mensagem = `Olá! Gostaria de fazer um pedido na Empadas da Estácio:%0A- Quantidade: ${qtd}%0A- Opção: ${catupiry}`;
+        const mensagem = `Olá! Gostaria de fazer um pedido na Pizzaria do lucas:%0A- Quantidade: ${qtd}%0A- Opção: ${catupiry}`;
         
         window.open(`https://wa.me{numero}?text=${mensagem}`, '_blank');
 
