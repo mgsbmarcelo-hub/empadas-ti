@@ -4,101 +4,113 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pizzas do lucas</title>
+    <title>pizzaria do lucas</title></title>
     <style>
-        /* Estilo para centralizar e colocar o fundo */
         body {
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #fce4bd; /* Cor de fundo (amarelado) */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fce4bd; /* Cor de fundo */
+            font-family: sans-serif;
         }
 
-        #container-vendas {
+        /* Estilo do Cartão */
+        #card-pedido {
             background-color: white;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 350px;
             width: 90%;
+            max-width: 350px;
+            transition: all 0.5s ease; /* Efeito suave na mudança */
         }
 
         h2 { color: #d35400; margin-bottom: 20px; }
-
-        label { display: block; margin-top: 15px; font-weight: bold; color: #444; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
 
         input, select {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box; /* Garante que não passe da largura */
+            padding: 12px;
+            margin-top: 8px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            box-sizing: border-box;
         }
 
-        button {
+        /* Botão do WhatsApp */
+        .btn-whatsapp {
             background-color: #25d366;
             color: white;
             border: none;
             padding: 15px;
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
             margin-top: 25px;
-            transition: background 0.3s;
         }
 
-        button:hover { background-color: #128c7e; }
+        /* Estilo quando o pedido é confirmado */
+        .confirmado {
+            background-color: #d4edda !important; /* Verde claro */
+            border: 2px solid #28a745 !important;
+        }
 
-        #agradecimento { display: none; }
+        #mensagem-sucesso { display: none; }
     </style>
 </head>
 <body>
 
-    <div id="container-vendas">
-        <!-- Parte do Formulário -->
-        <div id="interface-pedido">
-            <h2>pizzas do lucas</h2>
+    <div id="card-pedido">
+        <div id="formulario">
+            <h2>Empadas da Estácio</h2>
             
-            <label>Quantidade de pizzas:</label>
+            <label>Quantidade de Empadas:</label>
             <input type="number" id="quantidade" value="1" min="1">
 
-            <label>Adicionar Catupiry?</label>
+            <label>Com Catupiry?</label>
             <select id="catupiry">
                 <option value="Sem Catupiry">Não</option>
-                <option value="Com Catupiry">Sim (+ Adicional)</option>
+                <option value="Com Catupiry">Sim</option>
             </select>
 
-            <button onclick="enviarWhatsapp()">🚀 Pedir no WhatsApp</button>
+            <button class="btn-whatsapp" onclick="enviarPedido()">🚀 Enviar Pedido</button>
         </div>
 
-        <!-- Parte do Agradecimento -->
-        <div id="agradecimento">
-            <h2 style="color: #27ae60;">✅ Pedido Enviado!</h2>
-            <p>Muito obrigado por escolher a <strong>A pizzaria do lucas</strong>!</p>
+        <!-- Tela de Sucesso -->
+        <div id="mensagem-sucesso">
+            <h1 style="font-size: 50px;">✅</h1>
+            <h2 style="color: #155724;">Pedido Confirmado!</h2>
+            <p>Muito obrigado por escolher a <strong>Empadas da Estácio</strong>.</p>
+            <p style="font-size: 14px; color: #666;">Estamos preparando seu pedido...</p>
         </div>
     </div>
 
     <script>
-    function enviarWhatsapp() {
+    function enviarPedido() {
         const qtd = document.getElementById('quantidade').value;
         const catupiry = document.getElementById('catupiry').value;
         const numero = "5521999512027";
         
-        const mensagem = `Olá! Gostaria de fazer um pedido na Pizzaria do lucas:%0A- Quantidade: ${qtd}%0A- Opção: ${catupiry}`;
-        
-        window.open(`https://wa.me{numero}?text=${mensagem}`, '_blank');
+        // Link direto do WhatsApp (Formato mais compatível)
+        const mensagem = "Olá! Gostaria de fazer um pedido na Empadas da Estácio:%0A- Quantidade: " + qtd + "%0A- Adicional: " + catupiry;
+        const url = "https://api.whatsapp.com" + numero + "&text=" + mensagem;
 
-        // Esconde o formulário e mostra o agradecimento
-        document.getElementById('interface-pedido').style.display = 'none';
-        document.getElementById('agradecimento').style.display = 'block';
+        // 1. Abre o WhatsApp
+        window.open(url, '_blank');
+
+        // 2. Muda o Estilo do Formulário para "Confirmado"
+        const card = document.getElementById('card-pedido');
+        const form = document.getElementById('formulario');
+        const sucesso = document.getElementById('mensagem-sucesso');
+
+        form.style.display = 'none'; // Esconde os campos
+        sucesso.style.display = 'block'; // Mostra o agradecimento
+        card.classList.add('confirmado'); // Muda a cor do fundo do card
     }
     </script>
 
